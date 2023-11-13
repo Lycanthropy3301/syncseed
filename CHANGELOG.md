@@ -1,5 +1,60 @@
 # Changelog
 
+# Synchronized Seed Authentication Proof of Concept - Version 1.2
+
+## Changes
+
+1. **Configuration File Integration:**
+   - Added support for configuration files to centralize and manage server settings.
+   - Introduced a configuration file (`options.cfg`) for easy adjustment of parameters, including seed value bounds, challenge rounds, and server responses.
+
+2. **Dynamic Seed Challenge Rounds:**
+   - Implemented dynamic challenge rounds in the authentication process.
+   - Challenge rounds enhance security by introducing variability and unpredictability during user authentication.
+
+3. **Improved Logging:**
+   - Enhanced the logging system to capture more detailed information.
+   - Log entries now include timestamps, log levels, and specific details about authentication errors.
+
+4. **Timeout Handling:**
+   - Implemented timeout handling for server socket connections to improve responsiveness.
+   - The server now gracefully handles timeouts, logging a warning and transmitting an authentication failure response.
+
+5. **Code Refactoring and Cleanup:**
+   - Refactored code to improve readability and maintainability.
+   - Removed redundant code, improved variable naming, and organized imports for a cleaner codebase.
+
+6. **Directory Structure Update:**
+   - Adjusted the directory structure for improved organization.
+   - Configuration files are now stored in a dedicated `Config` directory.
+
+7. **Bug Fixes:**
+   - Addressed an issue with Ctrl+C interrupt handling during socket acceptance.
+   - Improved server shutdown behavior for a more reliable user experience.
+
+8. **Documentation Update:**
+   - Updated the README.md file to reflect the changes in configuration, usage, and contribution guidelines.
+   - Included a brief overview of the ChaCha algorithm and the role of challenge rounds in the authentication process.
+
+10. **Overall System Enhancement:**
+    - Improved the overall system by combining cryptographic best practices with configuration flexibility for educational and experimental use.
+
+## Important Notes
+
+- **Configuration File (`options.cfg`):**
+  - Users are encouraged to review and customize the configuration file to meet specific requirements.
+  - Ensure consistent configuration between server and client components for successful authentication.
+  - Run configurator.py in the 'Config' folder to update the config file and reconfigure seeds.
+
+- **Educational Purpose:**
+  - This proof of concept remains designed for educational purposes and is not intended for production use.
+  - Considerations for production environments, including secure storage mechanisms and communication protocols, should be addressed.
+
+## Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request if you have suggestions for improvements or additional features.
+
+
 ## Version 1.1
 
 ### Changes:
@@ -29,7 +84,7 @@
    - Introduced a basic mechanism for handling multiple simultaneous connections using threading. This lays the foundation for improved concurrency as the system scales.
 
 10. **CTRL+C Shutdown:**
-    - Added a KeyboardInterrupt handler to shut down the server when interrupted with Ctrl+C. This ensures proper cleanup before exiting.
+    - Added a KeyboardInterrupt handler to gracefully shut down the server when interrupted with Ctrl+C. This ensures proper cleanup before exiting.
 
 11. **Timeout Consideration:**
     - Implemented a timeout for connections to prevent potential issues with hanging connections.

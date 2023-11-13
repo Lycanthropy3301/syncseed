@@ -1,4 +1,4 @@
-# Synchronized Seed Authentication Proof of Concept - Demo Version 1.1
+# Synchronized Seed Authentication Proof of Concept - Demo Version 1.2
 
 ## Overview
 
@@ -19,6 +19,14 @@ The authentication system follows a challenge-response mechanism:
    - Generates a response to the server's challenge using a random seed, increment, and other parameters.
    - Communicates with the server, and if the response is verified successfully, increments the synchronized seed counter and updates the external file.
 
+## ChaCha Algorithm
+
+ChaCha is a stream cipher and cryptographic secure pseudorandom number generator (CSPRNG) designed by Daniel J. Bernstein. It operates on a 64-byte block and is known for its speed and security. In this system, ChaCha is used to generate random numbers for challenges and responses.
+
+## Challenge Rounds
+
+The concept of challenge rounds introduces variability into the authentication process. Challenge rounds determine how many random numbers are generated and combined to form the challenge presented to the client. Increasing challenge rounds enhances the security and complexity of the authentication algortithm.
+
 ## Disclaimer
 
 This proof of concept is solely intended to showcase the basic principles of synchronized seed authentication. It should not be considered a secure implementation and is not suitable for use in production builds. The following factors should be considered:
@@ -29,13 +37,21 @@ This proof of concept is solely intended to showcase the basic principles of syn
 
 - **Validation of User Input:** The code takes user input for the username and password without validation or sanitation. A production system should implement proper input validation and potentially use secure password hashing.
 
+## Dependencies
+
+This project requires randomgen and numpy. You can install these packages using pip as shown:
+
+  ```bash
+  pip install numpy randomgen
+  ```
+
 ## Usage
 
 1. Clone the repository:
 
    ```bash
    git clone https://github.com/Lycanthropy3301/syncseed.git
-   cd synchronized-seed-authentication
+   cd syncseed
    ```
 
 2. Run the server in the Source directory:
