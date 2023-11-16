@@ -1,5 +1,40 @@
 # Changelog
 
+# SyncSeed - Version 2.0
+
+## New Features
+
+1. **Synchronized Seed System:**
+   - SyncSeed transitions from the old seed-increment system to a synchronized seed system.
+   - Synchronized seeds dynamically change with each authentication attempt, enhancing security against various attacks.
+
+2. **Configurability:**
+   - Fine-tune key parameters for a tailored balance between security and performance.
+   - Adjust seed length, challenge rounds, scramble rounds, and other settings to match specific application requirements.
+
+3. **Update Seed Functionality:**
+   - Introduces the "update seed" function, allowing periodic refreshing of seed values to maintain long-term security.
+
+4. **ChaCha Pseudo-Random Number Generator:**
+   - Utilizes the ChaCha PRNG for generating secure and unpredictable seed values, enhancing overall randomness.
+
+5. **User-Friendly API:**
+   - Provides a straightforward API for easy integration into Python applications.
+
+## Configuration Options
+
+1. `set_seed_length(length)`: Set the length of the synchronized seed.
+2. `set_challenge_rounds(rounds)`: Define the number of challenge rounds for enhanced security.
+3. `set_scramble_rounds(rounds)`: Configure the scramble rounds to balance security and performance.
+4. `set_seed_value_lower_bound(lower_bound)`: Set the lower bound for seed values.
+5. `set_seed_value_upper_bound(upper_bound)`: Set the upper bound for seed values.
+6. `set_cha_cha_generator_rounds(rounds)`: Adjust the number of ChaCha generator rounds.
+
+### Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request if you have suggestions for improvements or additional features.
+
+
 # Synchronized Seed Authentication Proof of Concept - Version 1.2
 
 ## Changes
@@ -55,9 +90,9 @@
 Contributions are welcome! Feel free to open an issue or submit a pull request if you have suggestions for improvements or additional features.
 
 
-## Version 1.1
+# Synchronized Seed Authentication Proof of Concept - Version 1.1
 
-### Changes:
+## Changes:
 
 1. **Enhanced Error Handling:**
    - Added proper error handling mechanisms throughout the code to catch and log exceptions. This provides better insight into potential issues.
@@ -89,7 +124,7 @@ Contributions are welcome! Feel free to open an issue or submit a pull request i
 11. **Timeout Consideration:**
     - Implemented a timeout for connections to prevent potential issues with hanging connections.
 
-### Notes:
+## Notes:
 
 - This version represents a significant improvement in code structure, error handling, and security measures. It is recommended for use over the previous version.
 

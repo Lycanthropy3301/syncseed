@@ -1,75 +1,63 @@
-# Synchronized Seed Authentication Proof of Concept - Demo Version 1.2
+# SyncSeed - Authentication Module
 
 ## Overview
 
-This repository contains a proof-of-concept implementation of a synchronized seed authentication system. The system demonstrates a basic method of authentication using synchronized seeds and is meant for educational purposes. It is important to note that this is not intended for use in production environments. This system relies on randomgens implementation of 'ChaCha', a cryptographically secure PRNG.
+SyncSeed has evolved from a standalone proof of concept into a robust authentication module designed to enhance security in Python applications. This module leverages a synchronized seed-based challenge-response system to verify user authenticity.
 
-## How It Works
+## Key Features
 
-The authentication system follows a challenge-response mechanism:
+- **Synchronized Seeds:** The core of SyncSeed lies in synchronized seeds that dynamically change with each authentication attempt. These seeds as initialized when a user signs up, and are never transmitted after the initial sign up operation.
 
-1. **Server-side:**
-   - Reads user information and seed data from external files.
-   - Waits for a client connection, and extracts a username, password, and seed value from the client's initial message.
-   - Verifies the client's response based on the provided credentials and the synchronized seed value.
-   - Increments the seed counter server-side if authentication is successful.
+- **Configurability:** Adjust key parameters such as seed length, challenge rounds, and scramble rounds to balance security and performance based on specific application needs.
 
-2. **Client-side:**
-   - Reads the synchronized seed and increment from an external file.
-   - Generates a response to the server's challenge using a random seed, increment, and other parameters.
-   - Communicates with the server, and if the response is verified successfully, increments the synchronized seed counter and updates the external file.
+- **ChaCha PRNG:** Utilizes the ChaCha pseudo-random number generator for generating secure and unpredictable seed values.
 
-## ChaCha Algorithm
+- **User-Friendly API:** The module offers a straightforward API for integration into existing Python applications.
 
-ChaCha is a stream cipher and cryptographic secure pseudorandom number generator (CSPRNG) designed by Daniel J. Bernstein. It operates on a 64-byte block and is known for its speed and security. In this system, ChaCha is used to generate random numbers for challenges and responses.
+## Getting Started
 
-## Challenge Rounds
+To integrate SyncSeed into your project, follow these steps:
 
-The concept of challenge rounds introduces variability into the authentication process. Challenge rounds determine how many random numbers are generated and combined to form the challenge presented to the client. Increasing challenge rounds enhances the security and complexity of the authentication algortithm.
-
-## Disclaimer
-
-This proof of concept is solely intended to showcase the basic principles of synchronized seed authentication. It should not be considered a secure implementation and is not suitable for use in production builds. The following factors should be considered:
-
-- **File Operations:** Storing seed and increment values in plaintext files may pose security risks. In production, secure storage mechanisms should be employed.
-
-- **Communication Security:** The code uses a simple socket connection for communication. In a production system, use a secure communication protocol to protect data in transit.
-
-- **Validation of User Input:** The code takes user input for the username and password without validation or sanitation. A production system should implement proper input validation and potentially use secure password hashing.
-
-## Dependencies
-
-This project requires randomgen and numpy. You can install these packages using pip as shown:
-
-  ```bash
-  pip install numpy randomgen
-  ```
-
-## Usage
-
-1. Clone the repository:
-
+1. **Installation:**
    ```bash
-   git clone https://github.com/Lycanthropy3301/syncseed.git
-   cd syncseed
+   pip install syncseed
    ```
 
-2. Run the server in the Source directory:
+2. **Usage:**
+   ```python
+   from syncseed import SyncSeedGenerator
 
-   ```bash
-   cd Source
-   python main.py
+   # Initialize SyncSeed
+   sync_seed = SyncSeedGenerator()
+
+   # Authenticate a user
+   if sync_seed.authenticated(user_seed, seed_value):
+
+        # Update the seed
+        new_seed = sync_seed.update_seed()
+        print("Authentication successful!")
+
+   else:
+        print("Authentication failed.")
    ```
 
-3. Run one of the authentication programs included in either user directories (passwords are included in Users.txt):
+## Configuration
 
-   ```bash
-   cd User1_Dir
-   python auth.py
-   ```
+Fine-tune SyncSeed for your application by adjusting configuration parameters:
 
-Follow the on-screen prompts to enter a username and password. The client will communicate with the server, and the server's response will be displayed.
+- `set_seed_length(length)`: Set the length of the synchronized seed.
+- `set_challenge_rounds(rounds)`: Define the number of challenge rounds for enhanced security.
+- `set_scramble_rounds(rounds)`: Configure the scramble rounds to balance security and performance.
+- `set_seed_value_lower_bound(lower_bound)`: Set the lower bound for seed values.
+- `set_seed_value_upper_bound(upper_bound)`: Set the upper bound for seed values.
+- `set_cha_cha_generator_rounds(rounds)`: Adjust the number of ChaCha generator rounds.
 
-## Contributing
+## Performance Optimization
 
-Contributions are welcome! Feel free to open an issue or submit a pull request if you have suggestions for improvements or additional features.
+SyncSeed offers flexibility to optimize performance based on specific requirements. Regularly test and analyze the execution time under different configurations to strike an optimal balance between security and performance.
+
+## Acknowledgments
+
+SyncSeed is a collaborative effort, benefitting from community feedback and contributions. Your insights and suggestions are highly valued in the continued improvement of this authentication module.
+
+**Note:** SyncSeed is continuously evolving, and your feedback is crucial for its refinement. Feel free to raise issues, propose enhancements, or contribute to the project.

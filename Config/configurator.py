@@ -3,7 +3,7 @@ import secrets
 
 OPTIONS = '''
 [1] Modify/Display config file
-[2] Set up seeds and incrments
+[2] Set up seeds and increments
 [3] Exit
 '''
 
@@ -74,13 +74,13 @@ elif option == 2:
 
         with open(SERVER_SEED_PATH, 'w') as server_seed_file:
             for key, value in server_seeds.items():
-                server_seed_file.write(f'{key} {value} 0\n')
+                server_seed_file.write(f'{key} {value}\n')
 
         with open(USER1_SEED_PATH, 'w') as user_file:
-            user_file.write(f"{server_seeds['User1']} 0")
+            user_file.write(f"{server_seeds['User1']}")
 
         with open(USER2_SEED_PATH, 'w') as user_file:
-            user_file.write(f"{server_seeds['User2']} 0")
+            user_file.write(f"{server_seeds['User2']}")
 
         print('Changes succesful, exiting program.')
 

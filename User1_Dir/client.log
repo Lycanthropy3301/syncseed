@@ -1,0 +1,65 @@
+2023-11-13 19:36:13,263 [INFO] - Server Response: Failed!
+2023-11-13 19:36:13,263 [INFO] - CLient shutting down.
+2023-11-13 19:36:22,582 [INFO] - Server Response: Succeeded!
+2023-11-13 19:36:22,582 [ERROR] - Unexpected error: name 'generator' is not defined
+2023-11-13 19:36:22,582 [INFO] - CLient shutting down.
+2023-11-13 19:43:48,963 [INFO] - Server Response: Succeeded!
+2023-11-13 19:43:48,963 [ERROR] - Unexpected error: name 'seed_value' is not defined
+2023-11-13 19:43:48,963 [INFO] - CLient shutting down.
+2023-11-13 19:45:07,243 [INFO] - Server Response: 
+2023-11-13 19:45:07,243 [INFO] - CLient shutting down.
+2023-11-13 19:48:50,703 [INFO] - Server Response: 
+2023-11-13 19:48:50,703 [INFO] - CLient shutting down.
+2023-11-13 19:49:51,873 [INFO] - Server Response: Succeeded!
+2023-11-13 19:49:51,873 [INFO] - CLient shutting down.
+2023-11-13 19:50:16,713 [INFO] - Server Response: 
+2023-11-13 19:50:16,713 [INFO] - CLient shutting down.
+2023-11-13 19:51:12,043 [INFO] - Server Response: Succeeded!
+2023-11-13 19:51:12,043 [INFO] - CLient shutting down.
+2023-11-13 19:51:49,283 [INFO] - Server Response: Succeeded!
+2023-11-13 19:51:49,283 [INFO] - CLient shutting down.
+2023-11-13 19:51:55,603 [INFO] - Server Response: Succeeded!
+2023-11-13 19:51:55,603 [INFO] - CLient shutting down.
+2023-11-13 19:52:33,513 [INFO] - Server Response: Failed!
+2023-11-13 19:52:33,513 [INFO] - CLient shutting down.
+2023-11-13 19:52:41,496 [INFO] - Server Response: Failed!
+2023-11-13 19:52:41,496 [INFO] - CLient shutting down.
+2023-11-13 19:52:45,073 [INFO] - Server Response: Failed!
+2023-11-13 19:52:45,075 [INFO] - CLient shutting down.
+2023-11-13 20:14:04,637 [INFO] - Server Response: Failed!
+2023-11-13 20:14:04,637 [INFO] - CLient shutting down.
+2023-11-13 20:17:46,882 [INFO] - Server Response: Failed!
+2023-11-13 20:17:46,897 [INFO] - CLient shutting down.
+2023-11-13 20:18:45,566 [INFO] - Server Response: Failed!
+2023-11-13 20:18:45,566 [INFO] - CLient shutting down.
+2023-11-13 20:19:51,456 [INFO] - Server Response: Succeeded!
+2023-11-13 20:19:51,466 [INFO] - CLient shutting down.
+2023-11-14 16:24:21,271 [INFO] - Server Response: 
+2023-11-14 16:24:21,271 [INFO] - CLient shutting down.
+2023-11-14 16:25:48,321 [INFO] - Server Response: 
+2023-11-14 16:25:48,321 [INFO] - CLient shutting down.
+2023-11-14 16:27:13,456 [INFO] - Server Response: Failed!
+2023-11-14 16:27:13,456 [INFO] - CLient shutting down.
+2023-11-14 16:28:41,336 [INFO] - Server Response: 
+2023-11-14 16:28:41,336 [INFO] - CLient shutting down.
+2023-11-14 16:48:59,127 [ERROR] - Unexpected error: [WinError 10061] No connection could be made because the target machine actively refused it
+2023-11-14 16:48:59,127 [INFO] - CLient shutting down.
+2023-11-14 16:49:23,517 [INFO] - Server Response: 
+2023-11-14 16:49:23,517 [INFO] - CLient shutting down.
+2023-11-14 16:51:40,179 [INFO] - Server Response: 
+2023-11-14 16:51:40,179 [INFO] - CLient shutting down.
+2023-11-14 16:52:47,439 [INFO] - Server Response: Succeeded!
+2023-11-14 16:52:47,439 [ERROR] - Unexpected error: name 'syncSeedGenerator' is not defined
+2023-11-14 16:52:47,439 [INFO] - CLient shutting down.
+2023-11-14 16:53:06,689 [INFO] - Server Response: Failed!
+2023-11-14 16:53:06,699 [INFO] - CLient shutting down.
+2023-11-14 16:56:28,459 [INFO] - Server Response: Succeeded!
+2023-11-14 16:56:28,459 [ERROR] - Unexpected error: name 'syncSeedGenerator' is not defined
+2023-11-14 16:56:28,459 [INFO] - CLient shutting down.
+2023-11-14 16:57:57,995 [INFO] - Server Response: Succeeded!
+2023-11-14 16:57:57,995 [ERROR] - Unexpected error: name 'syncSeedGenerator' is not defined
+2023-11-14 16:57:57,995 [INFO] - CLient shutting down.
+2023-11-14 17:00:25,831 [INFO] - Server Response: Succeeded!
+2023-11-14 17:00:25,835 [INFO] - CLient shutting down.
+2023-11-14 17:00:40,474 [INFO] - Server Response: Succeeded!
+2023-11-14 17:00:40,484 [INFO] - CLient shutting down.

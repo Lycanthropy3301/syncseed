@@ -1,0 +1,37 @@
+2023-11-13 19:35:29,027 [INFO] - Server started.
+2023-11-13 19:36:22,582 [ERROR] - Unexpected error: 'int' object is not subscriptable
+2023-11-13 19:43:39,392 [INFO] - Server started.
+2023-11-13 19:43:48,963 [INFO] - User1 has authenticated!
+2023-11-13 19:45:07,243 [ERROR] - Unexpected error: SeedSequence expects int or sequence of ints for entropy not 9885793733894260
+2023-11-13 19:48:50,703 [ERROR] - Unexpected error: SeedSequence expects int or sequence of ints for entropy not 9885793733894260
+2023-11-13 19:48:56,993 [INFO] - Server started.
+2023-11-13 19:49:42,093 [INFO] - Server started.
+2023-11-13 19:49:51,873 [INFO] - User1 has authenticated!
+2023-11-13 19:50:16,713 [ERROR] - Unexpected error: SeedSequence expects int or sequence of ints for entropy not 8952922083001703
+2023-11-13 19:51:04,772 [INFO] - Server started.
+2023-11-13 19:51:12,043 [INFO] - User1 has authenticated!
+2023-11-13 19:51:49,293 [INFO] - User1 has authenticated!
+2023-11-13 19:51:55,603 [INFO] - User1 has authenticated!
+2023-11-13 20:13:54,575 [INFO] - Server started.
+2023-11-13 20:14:04,637 [ERROR] - Error during authentication for User1: high is out of bounds for int64
+2023-11-13 20:17:33,831 [INFO] - Server started.
+2023-11-13 20:19:42,876 [INFO] - Server started.
+2023-11-13 20:19:51,461 [INFO] - User1 has authenticated!
+2023-11-14 16:23:59,331 [INFO] - Server started.
+2023-11-14 16:24:21,271 [ERROR] - Unexpected error: __init__() missing 1 required positional argument: 'seed'
+2023-11-14 16:25:37,921 [INFO] - Server started.
+2023-11-14 16:25:48,321 [ERROR] - Unexpected error: __init__() missing 1 required positional argument: 'seed'
+2023-11-14 16:26:59,075 [INFO] - Server started.
+2023-11-14 16:28:36,330 [INFO] - Server started.
+2023-11-14 16:28:41,336 [ERROR] - Unexpected error: name 'generated_seed_value' is not defined
+2023-11-14 16:49:15,277 [INFO] - Server started.
+2023-11-14 16:49:23,517 [ERROR] - Unexpected error: name 'get_expected_seed_value' is not defined
+2023-11-14 16:51:29,699 [INFO] - Server started.
+2023-11-14 16:51:40,179 [ERROR] - Unexpected error: name 'user' is not defined
+2023-11-14 16:51:49,919 [INFO] - Server shutting down.
+2023-11-14 16:52:40,509 [INFO] - Server started.
+2023-11-14 16:52:47,439 [INFO] - User1 has authenticated!
+2023-11-14 16:56:28,459 [INFO] - User1 has authenticated!
+2023-11-14 16:57:57,995 [INFO] - User1 has authenticated!
+2023-11-14 17:00:25,835 [INFO] - User1 has authenticated!
+2023-11-14 17:00:40,484 [INFO] - User1 has authenticated!
