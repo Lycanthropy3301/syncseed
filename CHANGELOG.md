@@ -1,11 +1,11 @@
 # Changelog
 
-# SyncSeed - Version 2.0
+# Syncseed - Version 1.0.0
 
 ## New Features
 
 1. **Synchronized Seed System:**
-   - SyncSeed transitions from the old seed-increment system to a dynamic seed system.
+   - Syncseed transitions from the old seed-increment system to a dynamic seed system.
    - Synchronized seeds dynamically change with each authentication attempt, enhancing security against various attacks.
 
 2. **Configurability:**
