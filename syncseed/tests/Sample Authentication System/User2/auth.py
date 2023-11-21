@@ -2,7 +2,7 @@
 import numpy as np
 import socket
 import logging
-import syncseed
+import syncseed.syncseed as syncseed
 from randomgen import ChaCha
 
 # Import and unpack the config file
@@ -54,7 +54,7 @@ def connect_to_server(message, seed_value):
 
             # If the server indicates that authentication is succesful, update the client-side seed increment in 'seed-incrment.txt'.
 
-            new_seed = syncSeedGenerator.update_seed()
+            new_seed = syncseed_generator.update_seed()
 
             with open("seed-increment.txt", 'w') as seed_file:
                 seed_file.write(f'{new_seed}')
@@ -80,7 +80,7 @@ def main():
 
     # Set up the ChaCha generator with the user's seed.
 
-    seed_value = syncSeedGenerator.get_expected_seed_value(seed)
+    seed_value = syncseed_generator.get_expected_seed_value(seed)
 
     # Prepare the message to be sent to the server in the format 'username/password/seed_value'.
     message = f"{username}/{password}/{seed_value}"
@@ -90,5 +90,5 @@ def main():
 
 # Call to main function.
 if __name__ == '__main__':
-    syncSeedGenerator = syncseed.syncSeedGenerator()
+    syncseed_generator = syncseed.SyncseedGenerator()
     main()

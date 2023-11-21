@@ -5,7 +5,7 @@
 ## New Features
 
 1. **Synchronized Seed System:**
-   - SyncSeed transitions from the old seed-increment system to a synchronized seed system.
+   - SyncSeed transitions from the old seed-increment system to a dynamic seed system.
    - Synchronized seeds dynamically change with each authentication attempt, enhancing security against various attacks.
 
 2. **Configurability:**
@@ -14,9 +14,7 @@
 
 3. **Update Seed Functionality:**
    - Introduces the "update seed" function, allowing periodic refreshing of seed values to maintain long-term security.
-
-4. **ChaCha Pseudo-Random Number Generator:**
-   - Utilizes the ChaCha PRNG for generating secure and unpredictable seed values, enhancing overall randomness.
+   - Introduces seed mutations, enhancing the unpredictability of the overall system.
 
 5. **User-Friendly API:**
    - Provides a straightforward API for easy integration into Python applications.

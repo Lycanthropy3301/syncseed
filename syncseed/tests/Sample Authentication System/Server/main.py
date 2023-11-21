@@ -1,5 +1,5 @@
 # Import the required libraries.
-import syncseed
+import syncseed.syncseed as syncseed
 import socket
 import logging
 import threading
