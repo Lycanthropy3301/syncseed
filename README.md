@@ -124,7 +124,7 @@ Syncseed is a collaborative effort, benefitting from community feedback and cont
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE.md).
 
 ## Author
 
