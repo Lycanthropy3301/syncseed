@@ -10,10 +10,10 @@ with open('..\\Config\\options.cfg') as config_file:
     config_options = {key[0].strip(): value.strip() for line in config_file if (key := line.split('=', 1)) and '[' not in key[0] and key[0].strip() for value in key}
 
 # Unpack the Seed_Value challenge upper and lower bounds and number of challenge rounds. These must be consistent with both the server and client.
-SEED_VALUE_LOWER_BOUND = int(config_options['SEED_VALUE_LOWER_BOUND'])
-SEED_VALUE_UPPER_BOUND = int(config_options['SEED_VALUE_UPPER_BOUND'])
-CHALLENGE_ROUNDS = int(config_options['CHALLENGE_ROUNDS'])
-SEED_LENGTH = int(config_options['SEED_LENGTH'])
+seed_value_lower_bound = int(config_options['SEED_VALUE_LOWER_BOUND'])
+seed_value_upper_bound = int(config_options['SEED_VALUE_UPPER_BOUND'])
+seed_length = int(config_options['SEED_LENGTH'])
+challenge_rounds = int(config_options['CHALLENGE_ROUNDS'])
 
 # Declare the server address to connect to.
 SERVER_IP_ADDRESS = '127.0.0.1'
@@ -54,7 +54,7 @@ def connect_to_server(message, seed_value):
 
             # If the server indicates that authentication is succesful, update the client-side seed increment in 'seed-incrment.txt'.
 
-            new_seed = syncseed_generator.update_seed()
+            new_seed = SyncseedGenerator.update_seed()
 
             with open("seed-increment.txt", 'w') as seed_file:
                 seed_file.write(f'{new_seed}')
@@ -80,7 +80,7 @@ def main():
 
     # Set up the ChaCha generator with the user's seed.
 
-    seed_value = syncseed_generator.get_expected_seed_value(seed)
+    seed_value = SyncseedGenerator.get_expected_seed_value(seed)
 
     # Prepare the message to be sent to the server in the format 'username/password/seed_value'.
     message = f"{username}/{password}/{seed_value}"
@@ -90,5 +90,12 @@ def main():
 
 # Call to main function.
 if __name__ == '__main__':
-    syncseed_generator = syncseed.SyncseedGenerator()
+
+    SyncseedGenerator = syncseed.SyncseedGenerator()
+
+    SyncseedGenerator.seed_value_upper_bound = seed_value_upper_bound
+    SyncseedGenerator.seed_value_lower_bound = seed_value_lower_bound
+    SyncseedGenerator.seed_length = seed_length
+    SyncseedGenerator.challenge_rounds = challenge_rounds
+
     main()

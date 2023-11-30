@@ -1,5 +1,27 @@
 # Changelog
 
+# Syncseed - Version 1.0.1
+
+## New features
+
+1. **Test Code Improvements:**
+   - Streamlined and removed redundant code.
+
+2. **Syncseed Properties:**
+   - Implementation of properties for more intuitive configuration adjustments.
+   - Proper handling for invalid assignments to configuration options.
+
+3. **Benchmark Documentation**
+   - Added documentation for `cycle_generation_test.py` and `benchmark.py`.
+
+4. **Bug Fixes:**
+   - Fixed a bug which caused the sample authentication system to fail to execute.
+   - Fixed a bug where the sample authentication system would not load it's configuration properly.
+
+### Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request if you have suggestions for improvements or additional features.
+
 # Syncseed - Version 1.0.0
 
 ## New Features

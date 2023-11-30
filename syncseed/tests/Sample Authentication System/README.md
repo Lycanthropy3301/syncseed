@@ -9,7 +9,7 @@
    python main.py
    ```
 
-2. Run one of the authentication programs included in either user directories (passwords are included in Users.txt in the server directory):
+2. Run one of the authentication programs included in either user directories:
 
    ```bash
    cd User1_Dir
@@ -17,6 +17,8 @@
    ```
 
 Follow the on-screen prompts to enter a username and password. The client will communicate with the server, and the server's response will be displayed.
+
+**passwords are included in Users.txt in the server directory**
 
 ## Configuration
 

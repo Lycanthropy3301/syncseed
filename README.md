@@ -41,12 +41,12 @@ To integrate Syncseed into your project, follow these steps:
 ```python
 # Initialize Syncseed
 from syncseed.syncseed import SyncseedGenerator
-sync_seed = SyncseedGenerator()
+gen = SyncseedGenerator()
 
 # Authenticate a user
-if sync_seed.authenticated(user_seed, seed_value):
+if gen.authenticated(user_seed, seed_value):
     # Update the seed
-    new_seed = sync_seed.update_seed()
+    new_seed = gen.update_seed()
     print("Authentication successful!")
 else:
     print("Authentication failed.")
@@ -57,14 +57,14 @@ else:
 ```python
 # Initialize Syncseed
 from syncseed.syncseed import SyncseedGenerator
-sync_seed = SyncseedGenerator()
+gen = SyncseedGenerator()
 
 # [Load syncseed configuration to match that of the server...]
 # Assume 'user_seed' is the user's seed value stored in a file or database
 user_seed = 123456789
 
 # Generate the challenge value to transmit
-seed_value = sync_seed.get_expected_seed_value(user_seed)
+seed_value = gen.get_expected_seed_value(user_seed)
 ```
 
 ## Additional Notes
@@ -87,13 +87,13 @@ Here's an example of how you might use the `mutate_seed` function:
 import syncseed.syncseed as syncseed
 
 # Initialize the syncseed generator
-sync_seed = syncseed.SyncseedGenerator()
+gen = syncseed.SyncseedGenerator()
 
 # Assume 'current_seed' is the current seed value you want to mutate
 current_seed = 123456789
 
 # Call the 'mutate_seed' function to perform a mutation on the seed
-mutated_seed = sync_seed.mutate_seed(current_seed)
+mutated_seed = gen.mutate_seed(current_seed)
 
 # Now 'mutated_seed' contains the result of the mutation
 print(f'Mutated Seed: {mutated_seed}')
@@ -103,16 +103,16 @@ Integrating seed mutation into your application's security strategy enhances the
 
 ## Configuration
 
-Fine-tune Syncseed for your application by adjusting configuration parameters:
+Fine-tune Syncseed for your application by adjusting its various properties:
 
-- `set_seed_length(length)`: Set the length of the synchronized seed.
-- `set_challenge_rounds(rounds)`: Define the number of challenge rounds for enhanced security.
-- `set_scramble_rounds(rounds)`: Configure the scramble rounds to balance security and performance.
-- `set_seed_value_lower_bound(lower_bound)`: Set the lower bound for seed values.
-- `set_seed_value_upper_bound(upper_bound)`: Set the upper bound for seed values.
-- `set_cha_cha_generator_rounds(rounds)`: Adjust the number of ChaCha generator rounds.
+- `seed_length`: Set the length of the synchronized seed.
+- `challenge_rounds`: Define the number of challenge rounds for enhanced security.
+- `scramble_rounds`: Configure the scramble rounds to balance security and performance.
+- `seed_value_lower_bound`: Set the lower bound for seed values.
+- `seed_value_upper_bound`: Set the upper bound for seed values.
+- `cha_cha_generator_rounds`: Adjust the number of ChaCha generator rounds.
 
-For a more in-depth guide for deploying syncseed, refer to the 'Syncseed Deployment Guide' on my [github](https://github.com/Lycanthropy3301/syncseed)
+For a more in-depth guide for deploying Syncseed, refer to the [Syncseed Deployment Guide](https://github.com/Lycanthropy3301/syncseed/blob/master/DeploymentGuide.md)
 
 ## Performance Optimization
 
@@ -129,3 +129,5 @@ This project is licensed under the [MIT License](LICENSE.md).
 ## Author
 
 [Kavin Muthuselvan](https://github.com/Lycanthropy3301)
+
+[Syncseed's Github](https://github.com/Lycanthropy3301/syncseed)

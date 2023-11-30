@@ -2,21 +2,19 @@ import numpy as np
 import secrets
 from randomgen import ChaCha
 
-class SyncseedGenerator:
-
-    CHALLENGE_ROUNDS = 8
-    SEED_VALUE_LOWER_BOUND = 100_000_000_000
-    SEED_VALUE_UPPER_BOUND = 999_999_999_999
-    SEED_LENGTH = 18
-    CHA_CHA_GENERATOR_ROUNDS = 20
-    SCRAMBLE_ROUNDS = 0
-    MUTATE_SEED = True
+class SyncseedGenerator():
 
     def __init__(self):
-        self.new_seed = None
-        self.generator = np.random.Generator(ChaCha(seed=self.new_seed, rounds=self.CHA_CHA_GENERATOR_ROUNDS))
+        self.__new_seed = 0
+        self.seed_length = 18
+        self.challenge_rounds = 8
+        self.seed_value_lower_bound = 100_000_000_000
+        self.seed_value_upper_bound = 999_999_999_999
+        self.cha_cha_generator_rounds = 20
+        self.scramble_rounds = 0
+        self.generator = np.random.Generator(ChaCha(seed=self.__new_seed, rounds=20))
 
-    def authenticated(self, seed_value: int, user_seed: int = 0, update_auto: bool = False) -> bool:
+    def authenticated(self, seed_value: str, user_seed: int = 0, update_auto: bool = False) -> bool:
         """Check if a user is authenticated.
 
         Args:
@@ -40,12 +38,12 @@ class SyncseedGenerator:
         Returns:
             int: updated seed value
         """
-        self.new_seed = self.generator.integers(10 ** (self.SEED_LENGTH - 1), 10 ** self.SEED_LENGTH)
-        for _ in range(self.SCRAMBLE_ROUNDS+1):
-            self.generator = np.random.Generator(ChaCha(seed=self.new_seed, rounds=self.CHA_CHA_GENERATOR_ROUNDS))
-            self.new_seed = self.generator.integers(10 ** (self.SEED_LENGTH - 1), 10 ** self.SEED_LENGTH)
+        self.__new_seed = self.generator.integers(10 ** (self.seed_length - 1), 10 ** self.seed_length)
+        for _ in range(self.scramble_rounds+1):
+            self.generator = np.random.Generator(ChaCha(seed=self.__new_seed, rounds=self.cha_cha_generator_rounds))
+            self.__new_seed = self.generator.integers(10 ** (self.seed_length - 1), 10 ** self.seed_length)
 
-        return self.new_seed
+        return self.__new_seed
 
     def mutate_seed(self, seed: int) -> int:
         """Mutate the seed passed as an argument, and return it.
@@ -58,11 +56,11 @@ class SyncseedGenerator:
         """
         xor_value = self.generator.integers(1, 2**63)
         seed ^= xor_value
-        self.generator = np.random.Generator(ChaCha(seed=seed, rounds=self.CHA_CHA_GENERATOR_ROUNDS))
+        self.generator = np.random.Generator(ChaCha(seed=seed, rounds=self.cha_cha_generator_rounds))
         self.generator.jump(self.generator.integers(1,6))
-        self.new_seed = self.generator.integers(10 ** (self.SEED_LENGTH - 1), 10 ** self.SEED_LENGTH)
+        self.__new_seed = self.generator.integers(10 ** (self.seed_length - 1), 10 ** self.seed_length)
 
-        return self.new_seed
+        return self.__new_seed
 
     def get_expected_seed_value(self, seed: int) -> str:
         """Return the challenge response expected by the server for the client's seed.
@@ -73,8 +71,8 @@ class SyncseedGenerator:
         Returns:
             str: The value expected as a response.
         """
-        self.generator = np.random.Generator(ChaCha(seed=seed, rounds=self.CHA_CHA_GENERATOR_ROUNDS))
-        return ''.join(str(self.generator.integers(self.SEED_VALUE_LOWER_BOUND, self.SEED_VALUE_UPPER_BOUND, endpoint=True)) for _ in range(self.CHALLENGE_ROUNDS))
+        self.generator = np.random.Generator(ChaCha(seed=seed, rounds=self.cha_cha_generator_rounds))
+        return ''.join(str(self.generator.integers(self.seed_value_lower_bound, self.seed_value_upper_bound, endpoint=True)) for _ in range(self.challenge_rounds))
 
     def generate_seeds(self, n: int) -> list:
         """Generate a list random seeds to distribute to new users.
@@ -85,44 +83,77 @@ class SyncseedGenerator:
         Returns:
             list: The generated seeds.
         """
-        return [secrets.SystemRandom().randrange(10 ** (self.SEED_LENGTH - 1), 10 ** self.SEED_LENGTH) for _ in range(n)]
+        return [secrets.SystemRandom().randrange(10 ** (self.seed_length - 1), 10 ** self.seed_length) for _ in range(n)]
 
-    def set_seed_length(self, length: int):
-        self.SEED_LENGTH = min(length, 18)
+    @property
+    def seed_length(self) -> int:
+        return self.__seed_length
 
-    def set_challenge_rounds(self, rounds: int):
-        self.CHALLENGE_ROUNDS = rounds
+    @seed_length.setter
+    def seed_length(self, length: int):
+        try:
+            self.__seed_length = max(min(length, 18), 1)
+        except TypeError:
+            raise TypeError('seed length should be an integer')
+        except Exception as e:
+            raise e
 
-    def set_scramble_rounds(self, rounds: int):
-        self.SCRAMBLE_ROUNDS = rounds
+    @property
+    def challenge_rounds(self) -> int:
+        return self.__challenge_rounds
 
-    def set_seed_value_lower_bound(self, lower_bound: int):
-        self.SEED_VALUE_LOWER_BOUND = lower_bound
+    @challenge_rounds.setter
+    def challenge_rounds(self, rounds: int):
+        if type(rounds) is int:
+            self.__challenge_rounds = max(rounds, 1)
+        else:
+            raise TypeError('challenge rounds should be an integer')
 
-    def set_seed_value_upper_bound(self, upper_bound: int):
-        self.SEED_VALUE_UPPER_BOUND = upper_bound
+    @property
+    def scramble_rounds(self) -> int:
+        return self.__scramble_rounds
 
-    def set_cha_cha_generator_rounds(self, rounds: int):
-        self.CHA_CHA_GENERATOR_ROUNDS = rounds
+    @scramble_rounds.setter
+    def scramble_rounds(self, rounds: int):
+        if type(rounds) is int:
+            self.__scramble_rounds = max(rounds, 0)
+        else:
+            raise TypeError('scramble rounds should be an integer')
 
-    def get_seed_length(self) -> int:
-        return self.SEED_LENGTH
+    @property
+    def seed_value_lower_bound(self) -> int:
+        return self.__seed_value_lower_bound
 
-    def get_challenge_rounds(self) -> int:
-        return self.CHALLENGE_ROUNDS
+    @seed_value_lower_bound.setter
+    def seed_value_lower_bound(self, lower_bound: int):
+        if type(lower_bound) is int:
+            self.__seed_value_lower_bound = max(lower_bound, 0)
+        else:
+            raise TypeError('seed value lower bound should be an integer')
 
-    def get_scramble_rounds(self) -> int:
-        return self.SCRAMBLE_ROUNDS
+    @property
+    def seed_value_upper_bound(self) -> int:
+        return self.__seed_value_upper_bound
 
-    def get_seed_value_lower_bound(self) -> int:
-        return self.SEED_VALUE_LOWER_BOUND
+    @seed_value_upper_bound.setter
+    def seed_value_upper_bound(self, upper_bound: int):
+        if type(upper_bound) is int:
+            self.__seed_value_upper_bound = max(upper_bound, 0)
+        else:
+            raise TypeError('seed value upper bound should be an integer')
 
-    def get_seed_value_upper_bound(self) -> int:
-        return self.SEED_VALUE_UPPER_BOUND
+    @property
+    def cha_cha_generator_rounds(self) -> int:
+        return self.__cha_cha_generator_rounds
 
-    def get_cha_cha_generator_rounds(self) -> int:
-        return self.CHA_CHA_GENERATOR_ROUNDS
+    @cha_cha_generator_rounds.setter
+    def cha_cha_generator_rounds(self, rounds: int):
+        if type(rounds) is int:
+            self.__cha_cha_generator_rounds = max(rounds, 1)
+        else:
+            raise TypeError('cha cha generator rounds should be an integer')
 
-    def get_current_seed(self) -> int:
+    @property
+    def current_seed(self) -> int:
         """Return the LASTEST updated seed value stored in the syncseed generator"""
-        return self.new_seed
+        return self.__new_seed

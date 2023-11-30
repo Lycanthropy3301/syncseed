@@ -9,10 +9,10 @@ with open('..\\Config\\options.cfg') as config_file:
     config_options = {key[0].strip(): value.strip() for line in config_file if (key := line.split('=', 1)) and '[' not in key[0] and key[0].strip() for value in key}
 
 # Unpack the Seed_Value challenge upper and lower bounds and number of challenge rounds. These must be consistent with both the server and client.
-SEED_VALUE_LOWER_BOUND = int(config_options['SEED_VALUE_LOWER_BOUND'])
-SEED_VALUE_UPPER_BOUND = int(config_options['SEED_VALUE_UPPER_BOUND'])
-SEED_LENGTH = int(config_options['SEED_LENGTH'])
-CHALLENGE_ROUNDS = int(config_options['CHALLENGE_ROUNDS'])
+seed_value_lower_bound = int(config_options['SEED_VALUE_LOWER_BOUND'])
+seed_value_upper_bound = int(config_options['SEED_VALUE_UPPER_BOUND'])
+seed_length = int(config_options['SEED_LENGTH'])
+challenge_rounds = int(config_options['CHALLENGE_ROUNDS'])
 
 # Declare standard server responses.
 AUTH_SUCCESS = config_options['AUTH_SUCCESS']
@@ -32,47 +32,6 @@ with open("Seeds.txt", 'r') as seed_file:
 # Dictionary comprehensions to intialise dictionaries to hold username and passwords as well as seed values tied to each username.
 user_password = {user.split(' ')[0]: user.split(' ')[1] for user in users}
 seed_users = {seed.split(' ')[0]: int(seed.split(' ')[1]) for seed in seeds}
-
-
-
-# Function to check if a user succesfully authenticates. Returns a boolean at all times, even when an error is encountered.
-def authenticated(user, password, seed_value):
-
-    # Basic exception handling. Catches KeyErrors and ValueErrors as seen later in the code.
-    try:
-
-
-
-
-
-
-        # Check if user-transmitted seed_value is actually an integer, return false otherwise.
-        if not(seed_value.isnumeric()):
-            return False
-
-        # Set up the ChaCha generator with the user's seed.
-        generator = np.random.Generator(ChaCha(seed=seed, rounds=20))
-
-        seed_message = ''
-
-        # Generate a large random number based on the value of CHALLENGE_ROUNDS
-        for i in range(CHALLENGE_ROUNDS):
-            generated_seed_value = generator.integers(SEED_VALUE_LOWER_BOUND, SEED_VALUE_UPPER_BOUND, endpoint=True)
-            seed_message += str(generated_seed_value)
-
-        # Check if seed_values mach
-        if seed_value == seed_message:
-            generator = np.random.Generator(ChaCha(seed=generated_seed_value, rounds=20))
-            new_seed = generator.integers(10**(SEED_LENGTH-1), (10**SEED_LENGTH)-1, endpoint=True)
-            seed_users[user] = new_seed
-            return True
-
-        # Return false if seed value doesn't match.
-        return False
-
-    # Exception handling as aforementioned.
-    except (KeyError, ValueError) as exception:
-        logging.error(f"Error during authentication for {user}: {str(exception)}")
 
 def handle_connection(client):
 
@@ -108,12 +67,10 @@ def handle_connection(client):
         # Exctract Seeds from the seed_users dictionary.
         seed = seed_users[username]
 
-        syncSeedGenerator = syncseed.syncSeedGenerator()
-
         # Call to the syncseed authentication function
-        if syncSeedGenerator.authenticated(seed_value, seed):
+        if SyncseedGenerator.authenticated(seed_value, seed):
 
-            new_seed = syncSeedGenerator.update_seed()
+            new_seed = SyncseedGenerator.update_seed()
 
             seed_users[username] = new_seed
 
@@ -202,6 +159,14 @@ def main():
     # Close the server socket if loop is exited.
     listener.close()
 
-# Run the mainloop function.
+# Set up the Syncseed generator and run the mainloop function.
 if __name__ == '__main__':
+
+    SyncseedGenerator = syncseed.SyncseedGenerator()
+
+    SyncseedGenerator.seed_value_upper_bound = seed_value_upper_bound
+    SyncseedGenerator.seed_value_lower_bound = seed_value_lower_bound
+    SyncseedGenerator.seed_length = seed_length
+    SyncseedGenerator.challenge_rounds = challenge_rounds
+
     main()
