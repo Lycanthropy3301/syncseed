@@ -1,4 +1,3 @@
-
 # Syncseed - Deployment Guide
 Welcome to the Syncseed deployment guide. Included in this file is how the Syncseed algorithm works, and how you can use this algorithm in your own projects.
 
@@ -116,6 +115,80 @@ These options are straightforward. They set the upper and lower bounds for the v
 5. `cha_cha_generator_rounds`
 
 This option sets the generator rounds within the ChaCha generator used in Syncseed. Usually, a value of 12 should suffice. However, due to it's minimal performance impact, this value has been set to 20 by default. For more information, see [Randomgen's page on ChaCha](https://bashtage.github.io/randomgen/bit_generators/chacha.html).
+
+# SEA (Syncseed Exchange Algorithm)
+SEA takes advantage of a centralized Trusted Authority (TA), which has knowledge of the seeds of two users. Let's assume these two users are user 1 and user 2 respectively.
+
+Let's assume user 1's seed is 12 and user 2's seed is 73
+```python
+>>> user1_seed = 12345678
+>>> user2_seed = 87654321
+>>> import syncseed.seed_exchange as seed_exchange
+>>> sea = seed_exchange.SyncseedExchangeAlgorithm
+>>> sea.seed_length = 8 # Make sure this is the same length as user seeds
+```
+Now, user 1 and user 2 send a request to the Trusted Authority (TU), requesting a synchronized seed for the both of them. The TU then returns transformations to user 1 and user 2 to transform their seeds into a different one. There are 3 methods this exchange can take place:
+
+1. [**Parity Transformation**](#parity-transformation)
+2. [**Exchange Transformation**](#exchange-transformation)
+3. [**Selection Transformation**](#selection-transformation)
+
+## 1. Parity Transformation
+
+The Parity Transformation method performs a bitwise XOR operation on the seeds and nonces to generate transformations. This method ensures a secure exchange of seeds without directly transmitting them, as the final seed will be neither user's seed, instead a third hidden seed created by the TA.
+
+### Usage
+
+```python
+>>> transformation_user1, transformation_user2 = sea.parity_transformation(user1_seed, user2_seed)
+>>> sea.extract_parity(user1_seed, transformation_user1) # See how we end up with a different seed?
+58493659
+>>> sea.extract_parity(user2_seed, transformation_user2)
+58493659
+```
+
+## 2. Exchange Transformation
+
+### Description
+
+The Exchange Transformation method performs a bitwise XOR operation on the seeds and nonces. This transformation will cause both users to end up exchanging seeds. This way, both users can authenticate each other using each other's seeds.
+
+### Usage
+
+```python
+>>> transformation_user1, transformation_user2 = sea.exchange_transformation(user1_seed, user2_seed)
+>>> sea.extract_parity(user1_seed, transformation_user1)
+87654321
+>>> sea.extract_parity(user2_seed, transformation_user2)
+12345678
+```
+
+## 3. Selection Transformation
+
+### Description
+
+The Selection Transformation method involves randomly choosing one seed, updating it using Syncseed, and performing a bitwise XOR operation with nonces. Using this method, the selected seed will be the output extracted at both user ends, and this seed will be the seed that is used for authentication between peers. Through this method, seeds can also be synchronized between two different clients.
+
+### Usage
+
+```python
+>>> transformation_user1, transformation_user2 = sea.exchange_transformation(user1_seed, user2_seed)
+>>> sea.extract_parity(user1_seed, transformation_user1)
+12345678
+>>> sea.extract_parity(user2_seed, transformation_user2)
+12345678
+```
+
+## Additional Configuration
+
+The `SyncseedExchangeAlgorithm` class includes properties for configuring seed length and the number of transformation rounds:
+
+- `seed_length`: Set the desired seed length.
+- `transform_rounds`: Set the number of transformation rounds for extracting the seed from parity transformations (optional).
+- `mutate = True`: This argument can be used for parity extraction, simply mutating the seed after (optional).
+
+Feel free to experiment with different configurations based on your security requirements.
+
 # Deploying Syncseed
 
 Integrating Syncseed into your system is a straightforward process. By following the deployment steps outlined below, you can seamlessly implement the Syncseed algorithm to safeguard your applications. This section provides a guide to help you successfully deploy Syncseed and leverage its secure authentication capabilities in your projects.
@@ -138,6 +211,9 @@ Consider setting up a method of session management, where a user can have multip
 ### How do I know how well Syncseed performs?
 Consider using the benchmarking tools provided in the `syncseed/tests` folder.
 
+### What are seed exchanges used for?
+
+Seed exchanges can be used for anything from seed synchronization to device synchronization and peer to peer authentication. Feel free to experiment with the module to find out what use case would suit you the best.
+
 ### I still have unanswered questions.
 Feel free to contact me or raise an issue. Syncseed is an open-source, collaborative project, and your feedback is invaluable!
-##

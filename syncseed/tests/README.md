@@ -1,8 +1,8 @@
-# Syncseed Cycle Generation Test and Benchmarking Tool
+# Syncseed Cycle Generation Test and Benchmarking Tools
 
 ## Overview
 
-This toolkit is designed to evaluate the performance and cycle generation capabilities of the Syncseed authentication module. The cycle generation test assesses how many iterations it takes for the generator to produce a duplicate seed, indicating the formation of a cycle. The benchmarking tool measures the execution time of the authentication algorithm under different configurations.
+This toolkit is designed to evaluate the performance and cycle generation capabilities of the Syncseed authentication module. The cycle generation test assesses how many iterations it takes for the generator to produce a duplicate seed, indicating the formation of a cycle. The benchmarking tools measure the execution time of the authentication algorithm and seed exchange algorithm under different configurations.
 
 ## Cycle Generation Test
 
@@ -18,7 +18,7 @@ This toolkit is designed to evaluate the performance and cycle generation capabi
 3. **Results:**
    - The script will output the number of iterations before a duplicate seed is generated.
 
-## Benchmarking Tool
+## Syncseed Benchmarking Tool
 
 ### Instructions:
 
@@ -26,11 +26,25 @@ This toolkit is designed to evaluate the performance and cycle generation capabi
    - Ensure that you have Syncseed installed: `pip install syncseed`
 
 2. **Usage:**
-   - Run `benchmark.py` to execute the benchmarking tool.
+   - Run `syncseed_benchmark.py` to execute the benchmarking tool.
    - Modify the configuration parameters in the script to test different scenarios.
 
 3. **Results:**
    - The tool will display the time taken for a specified number of iterations, helping you evaluate Syncseed's performance under various settings.
+
+## Seed Exchange Benchmarking Tool
+
+### Instructions:
+
+1. **Installation:**
+   - Ensure that you have Syncseed installed: `pip install syncseed`
+
+2. **Usage:**
+   - Run `seed_exchange_benchmark.py` to execute the benchmarking tool.
+   - Modify the configuration parameters in the script to test different scenarios.
+
+3. **Results:**
+   - The tool will display the time taken for a specified number of iterations for each seed exchange method.
 
 ## Additional Notes
 

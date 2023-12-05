@@ -57,7 +57,7 @@ class SyncseedGenerator():
         xor_value = self.generator.integers(1, 2**63)
         seed ^= xor_value
         self.generator = np.random.Generator(ChaCha(seed=seed, rounds=self.cha_cha_generator_rounds))
-        self.generator.jump(self.generator.integers(1,6))
+        self.generator = np.random.Generator(self.generator.bit_generator.jumped(self.generator.integers(1,6)))
         self.__new_seed = self.generator.integers(10 ** (self.seed_length - 1), 10 ** self.seed_length)
 
         return self.__new_seed

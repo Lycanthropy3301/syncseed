@@ -1,28 +1,32 @@
+
 # Syncseed - Authentication Module
 
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Key Features](#key-features)
-3. [Getting Started](#getting-started)
-4. [Additional Notes](#additional-notes)
+2. [New Features](#new-features)
+3. [Key Features](#key-features)
+4. [Getting Started](#getting-started)
+5. [Additional Notes](#additional-notes)
 6. [Configuration](#configuration)
 7. [Performance Optimization](#performance-optimization)
 8. [Acknowledgments](#acknowledgments)
 9. [License](#license)
 10. [Author](#author)
 
-
 ## Overview
 
-Syncseed has evolved from a standalone proof of concept into a robust authentication module designed to enhance security in Python applications. This module leverages a synchronized seed-based challenge-response system to verify user authenticity. Seeds are generated using a CSPRNG to ensure unpredictability.
+Syncseed is an authentication module that leverages a synchronized seed-based challenge-response system to verify user authenticity. Seeds are generated using a CSPRNG to ensure unpredictability. Now, Syncseed also contains a seed exchange system, which can be used in peer-to-peer communication system through an intermediate Trusted Authority (TA).
+
+## Major Update - New Features
+The Syncseed algorithm now contains an additional module - `seed_exchange`. This module contains three variations of a solution for dynamic peer to peer authentication using Syncseed, made possible through the Syncseed Exchange Algorithm (SEA). Please refer to the readme under `syncseed/tests/Seed Exchange Example` for more information.
 
 ## Key Features
 
 - **Synchronized Seeds:** The core of Syncseed lies in synchronized seeds that dynamically change with each authentication attempt. These seeds are initialized when a user signs up and are never transmitted after the initial sign-up operation.
-- **Configurability:** Adjust key parameters such as seed length, challenge rounds, and scramble rounds to balance security and performance based on specific application needs.
+- **Configurability:** Adjust key parameters such as seed length, challenge rounds, and scramble rounds to balance security and performance based on specific application needs. Also fine tune the seed exchange module using the parameters seed length and transform rounds
 - **ChaCha PRNG:** Utilizes the ChaCha pseudo-random number generator for generating secure and unpredictable seed values.
-- **User-Friendly API:** The module offers a straightforward API for integration into existing Python applications.
+- **User-Friendly API:** The module offers straightforward APIs for integration into existing Python applications.
 
 
 ## Getting Started
@@ -116,7 +120,7 @@ For a more in-depth guide for deploying Syncseed, refer to the [Syncseed Deploym
 
 ## Performance Optimization
 
-Syncseed offers flexibility to optimize performance based on specific requirements. Regularly test and analyze the execution time under different configurations to strike an optimal balance between security and performance. Within the 'tests' folder of the project, you'll find a performance benchmarking program for Syncseed. Feel free to customize this program to evaluate various configurations. Additionally, the algorithm's security can be assessed using the cycle generation test, also available in the same folder. This test allows you to determine the number of unique seeds that Syncseed can generate before a cycle forms with seed values.
+Syncseed offers flexibility to optimize performance based on specific requirements. Regularly test and analyze the execution time under different configurations to strike an optimal balance between security and performance. Within the `syncseed/tests` folder of the project, you'll find a performance benchmarking program for Syncseed. Feel free to customize this program to evaluate various configurations. Additionally, the algorithm's security can be assessed using the cycle generation test, also available in the same folder. This test allows you to determine the number of unique seeds that Syncseed can generate before a cycle forms with seed values.
 
 ## Acknowledgments
 

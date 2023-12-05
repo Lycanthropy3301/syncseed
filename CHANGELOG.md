@@ -1,5 +1,29 @@
 # Changelog
 
+# Major Update: Syncseed - Version 1.1.0
+
+## New features
+
+1. **SEA (Syncseed Exchange Algorithm):**
+	 - Introduced an additional module called `seed_exchange` containing SEA.
+	 - Provides three methods of securely creating or exchanging seeds using a Trusted Authority (TU).
+
+2. **Bug Fixes:**
+	 - Fixed a critical bug which caused the `mutate_seed` function to fail.
+
+3. **Seed Exchange Example:**
+	- Added an example of the SEA algorithm in the Syncseed tests folder.
+
+4. **Documentation:**
+	- Added additional documentation relating to SEA.
+
+4. **SEA Benchmark:**
+	- Added a customizable benchmarking tool for SEA.
+
+### Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request if you have suggestions for improvements or additional features.
+
 # Syncseed - Version 1.0.1
 
 ## New features
