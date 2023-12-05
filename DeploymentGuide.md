@@ -119,7 +119,7 @@ This option sets the generator rounds within the ChaCha generator used in Syncse
 # SEA (Syncseed Exchange Algorithm)
 SEA takes advantage of a centralized Trusted Authority (TA), which has knowledge of the seeds of two users. Let's assume these two users are user 1 and user 2 respectively.
 
-Let's assume user 1's seed is 12 and user 2's seed is 73
+Let's assume user 1's seed is 12345678 and user 2's seed is 87654321
 ```python
 >>> user1_seed = 12345678
 >>> user2_seed = 87654321
