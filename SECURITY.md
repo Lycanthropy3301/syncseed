@@ -5,7 +5,7 @@
 Only the lates version of syncseed actively recieve security updates.
 Ensure to update syncseed regularly using pip:
 ```bash
-pip install syncseed
+pip install --upgrade syncseed
 ```
 
 Supported versions
