@@ -124,7 +124,7 @@ Let's assume user 1's seed is 12 and user 2's seed is 73
 >>> user1_seed = 12345678
 >>> user2_seed = 87654321
 >>> import syncseed.seed_exchange as seed_exchange
->>> sea = seed_exchange.SyncseedExchangeAlgorithm
+>>> sea = seed_exchange.SyncseedExchangeAlgorithm()
 >>> sea.seed_length = 8 # Make sure this is the same length as user seeds
 ```
 Now, user 1 and user 2 send a request to the Trusted Authority (TU), requesting a synchronized seed for the both of them. The TU then returns transformations to user 1 and user 2 to transform their seeds into a different one. There are 3 methods this exchange can take place:
