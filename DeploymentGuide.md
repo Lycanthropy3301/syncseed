@@ -1,3 +1,4 @@
+
 # Syncseed - Deployment Guide
 Welcome to the Syncseed deployment guide. Included in this file is how the Syncseed algorithm works, and how you can use this algorithm in your own projects.
 
@@ -8,7 +9,9 @@ Welcome to the Syncseed deployment guide. Included in this file is how the Syncs
 
 2. [**Syncseed Configuration Options**](#syncseed-configuration-options)
 
-3. [**Deploying Syncseed**](#deploying-syncseed)
+3. [**Syncseed Exchange Algorithm (SEA)**](#syncseed-exchange-algorithm) 
+
+4. [**Deploying Syncseed**](#deploying-syncseed)
 
 
 # The Syncseed Algorithm
@@ -116,8 +119,8 @@ These options are straightforward. They set the upper and lower bounds for the v
 
 This option sets the generator rounds within the ChaCha generator used in Syncseed. Usually, a value of 12 should suffice. However, due to it's minimal performance impact, this value has been set to 20 by default. For more information, see [Randomgen's page on ChaCha](https://bashtage.github.io/randomgen/bit_generators/chacha.html).
 
-# SEA (Syncseed Exchange Algorithm)
-SEA takes advantage of a centralized Trusted Authority (TA), which has knowledge of the seeds of two users. Let's assume these two users are user 1 and user 2 respectively.
+# Syncseed Exchange Algorithm
+The Syncseed Exchange Algorithm (SEA) takes advantage of a centralized Trusted Authority (TA), which has knowledge of the seeds of two users. Let's assume these two users are user 1 and user 2 respectively.
 
 Let's assume user 1's seed is 12345678 and user 2's seed is 87654321
 ```python
