@@ -71,8 +71,8 @@ nonce_user2 = secrets.SystemRandom().randrange(2**31)
 transformation_user1, transformation_user2 = sea.exchange_transformation(user1_seed, user2_seed, nonce_user1, nonce_user2)
 
 # Exchange transformations securely between users
-transformation_received_user1 = transformation_user2
-transformation_received_user2 = transformation_user1
+transformation_received_user1 = transformation_user1
+transformation_received_user2 = transformation_user2
 
 # Retrieve the updated seeds from the received transformations with nonces
 updated_seed_user1 = sea.extract_exchange(user1_seed, transformation_received_user1, nonce_user1)
