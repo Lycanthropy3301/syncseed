@@ -43,8 +43,8 @@ user2_seed = 987654321
 transformation_user1, transformation_user2 = sea.parity_transformation(user1_seed, user2_seed)
 
 # Exchange transformations securely between users
-transformation_received_user1 = transformation_user2
-transformation_received_user2 = transformation_user1
+transformation_received_user1 = transformation_user1
+transformation_received_user2 = transformation_user2
 
 # Retrieve the updated seeds from the received transformations
 updated_seed_user1 = sea.extract_parity(user1_seed, transformation_received_user1)
