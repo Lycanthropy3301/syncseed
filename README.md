@@ -1,3 +1,7 @@
+> :warning: Syncseed is no longer maintained!
+> Although not proven insecure, insufficient research has been conducted in order to verify its viability
+> However, you are still welcome to use and treat the project as a proof-of-concept
+> Use at your own risk! The owner retains no responsibility of damages as a result of use of this module
 
 # Syncseed - Authentication Module
 
